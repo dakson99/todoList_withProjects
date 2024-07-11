@@ -1,0 +1,335 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-color: #f3f0ff;
+    font-family: 'Work Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+}
+
+.heading__primary {
+    padding: 3.2rem;
+    font-size: 4.2rem;
+    background-color: #718e96;
+    color: #eee;
+}
+
+.todoApp {
+    display: flex;
+    min-height: calc(100vh - 104px - 48px);
+}
+
+.main {
+    background-color: #eee;
+    width: 100%;
+}
+
+.sidebar {
+    background-color: #ddd;
+    align-items: center;
+    padding-top: 3.2rem;
+    min-width: 40rem;
+}
+
+.btn,
+.heading__secondary {
+    font-size: 2.6rem;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #222b2d;
+}
+
+.btn:hover {
+    background-color: #ccc;
+}
+
+.heading__secondary {
+    cursor: auto;
+    margin-bottom: 8rem;
+}
+
+.sidebar__form__btns {
+    display: flex;
+    justify-content: space-between;
+    gap: 18rem;
+}
+
+.btn__my__projects,
+.btn__new__project {
+    background-color: #ddd;
+    margin-left: 3rem;
+    width: 85%;
+}
+
+.btn__new__project,
+.btn__new__todo {
+    margin-bottom: 3rem;
+    font-weight: 600;
+    color: #39474b;
+}
+
+.btn__add__project,
+.btn__cancel__project {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 2rem;
+}
+
+.btn__my__projects,
+.btn__my__todos {
+    margin-bottom: 6rem;
+}
+
+.icon {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: #39474b;
+}
+
+.icon__close__project {
+    color: #333;
+    display: flex;
+    align-items: center;
+    width: 2.4rem;
+    width: 2.4rem;
+}
+
+.icon__close__project:hover {
+    color: #111;
+}
+
+.form__sidebar label {
+    font-size: 1.6rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.form__sidebar input {
+    font-size: 1.8rem;
+    padding: 1.2rem 5.4rem;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.form__sidebar {
+    border-radius: 5px;
+    padding: 2.5rem 2.75rem;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: center;
+    justify-items: center;
+
+    transition: all 0.5s, transform 1ms;
+}
+
+.sidebar__list__div {
+    margin-left: 2.4rem;
+    width: 85%;
+}
+
+.sidebar__list {
+    list-style: none;
+}
+
+.sidebar__list__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 2rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.sidebar__list__item:hover {
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+/*  main  */
+.main__container {
+    width: 100rem;
+    margin: 0 auto;
+}
+
+.main__top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 3.2rem;
+}
+
+.main__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.main__list__item {
+    font-size: 2.2rem;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.main__list__item:hover {
+    background-color: #ddd;
+}
+
+.no__todos {
+    padding: 1rem 2rem;
+    text-align: center;
+    font-size: 2.2rem;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #ccc;
+    border: 1px solid #c7c7c7;
+    color: #333;
+    font-weight: 600;
+    margin-top: 3rem;
+}
+
+.todo__item {
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 0.4rem;
+}
+
+.todo__item:hover {
+    background-color: #ddd;
+}
+
+.todo_p {
+    display: inline-block;
+    font-weight: 700;
+    color: #39474b;
+    font-size: 1.8rem;
+}
+
+.todo_p2 {
+    width: 25rem;
+}
+
+.todo__buttons__div {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn__todo__delete {
+    display: inline-block;
+    font-size: 1.8rem;
+}
+
+.form__main {
+    opacity: 100;
+    transition: all 0.5s, transform 1ms;
+}
+
+.form__main__labelinputs {
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #c7c7c7;
+    background-color: #ddd;
+    margin-bottom: 1rem;
+    gap: 4rem;
+}
+
+.form__main__labelinput {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.form__main__label {
+    font-size: 1.4rem;
+    color: #666;
+}
+
+.form__main__input {
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    border-width: 0px;
+    border: none;
+    outline: none;
+}
+
+.form__main__input__title {
+    width: 42rem;
+}
+
+.form__main__input__date {
+    margin-right: 12rem;
+}
+
+.main__form__btns {
+    display: flex;
+    gap: 2rem;
+}
+
+.btn__add__todo,
+.btn__cancel__todo {
+    width: 100%;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.btn__add__todo {
+    border: 1px solid #99dd99;
+    background-color: #aaffaa;
+}
+
+.btn__add__todo:hover {
+    background-color: #99e699;
+}
+
+.btn__cancel__todo,
+.btn__todo__delete {
+    border: 1px solid #eeadad;
+    background-color: #ffbebe;
+}
+
+.btn__cancel__todo:hover,
+.btn__todo__delete:hover {
+    background-color: #d69c9c;
+}
+
+.hidden {
+    transform: translateY(-200rem);
+    height: 0;
+    padding: 0 2.25rem;
+    margin-bottom: 0;
+    opacity: 0;
+}

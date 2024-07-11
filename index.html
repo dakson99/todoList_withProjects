@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,10 +7,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
 
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet" />
     <title>Todo list</title>
     <script type="module" defer src="script.js"></script>
 </head>
 
-<body></body>
+<body>
+    <div class="container">
+        <div class="heading__div">
+            <h1 class="heading__primary">TODO LIST</h1>
+        </div>
+        <div class="todoApp">
+            <div class="sidebar">
+                <button class="btn btn__new__project">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+                        <path fill-rule="evenodd"
+                            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                            clip-rule="evenodd" />
+                    </svg>
+
+                    <span>New Project</span>
+                </button>
+
+                <h2 class="heading__secondary">
+                    Projects&nbsp;
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+                        <path fill-rule="evenodd"
+                            d="M12 2.25a.75.75 0 01.75.75v16.19l6.22-6.22a.75.75 0 111.06 1.06l-7.5 7.5a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 111.06-1.06l6.22 6.22V3a.75.75 0 01.75-.75z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </h2>
+
+                <div class="sidebar__list__form">
+                    <form class="form__sidebar hidden">
+                        <input type="text" placeholder="My Project" id="input__project" required />
+                        <div class="sidebar__form__btns">
+                            <button class="btn btn__add__project">Add</button>
+                            <button class="btn btn__cancel__project">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="sidebar__list__div">
+                    <ul class="sidebar__list">
+                        <!-- <li class="sidebar__list__item">My first project</li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="main">
+                <div class="main__container">
+                    <div class="main__top">
+                        <button class="btn btn__new__todo">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+                                <path fill-rule="evenodd"
+                                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span> New todo</span>
+                        </button>
+
+                        <h2 class="heading__secondary">
+                            <span>Todos&nbsp;</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+                                <path fill-rule="evenodd"
+                                    d="M12 2.25a.75.75 0 01.75.75v16.19l6.22-6.22a.75.75 0 111.06 1.06l-7.5 7.5a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 111.06-1.06l6.22 6.22V3a.75.75 0 01.75-.75z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </h2>
+                    </div>
+                    <div class="main__bottom">
+                        <ul class="main__list">
+                            <!-- <li class="main__list__item"></li> -->
+                        </ul>
+                    </div>
+                    <form class="form__main hidden">
+                        <div class="form__main__labelinputs">
+                            <div class="form__main__labelinput form__main__labelinput__title">
+                                <label class="form__main__label" for="title">Todo:</label>
+                                <input class="form__main__input form__main__input__title" type="text" id="title"
+                                    name="title" placeholder="My todo" required />
+                            </div>
+                            <div class="form__main__labelinput form__main__input__date">
+                                <label class="form__main__label" for="date">Due:</label>
+                                <input class="form__main__input" type="date" id="dueDate" name="dueDate" required />
+                            </div>
+                        </div>
+                        <div class="main__form__btns">
+                            <button class="btn btn__add__todo">Add</button>
+                            <button class="btn btn__cancel__todo">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 
 </html>
