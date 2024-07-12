@@ -54,7 +54,7 @@ class ProjectManager {
 
 
         // display form
-        buttonNewProject.addEventListener('click', this.displayForm);
+        buttonNewProject.addEventListener('click', this.displaySidebarForm);
 
         // create project
         formSidebar.addEventListener('submit', this.createProject.bind(this));
@@ -77,11 +77,6 @@ class ProjectManager {
         this.hideForm(formSidebar);
 
         inputProject.value = '';
-    }
-
-    displayMainForm() {
-        formMain.classList.remove('hidden');
-        inputTitle.value = inputDueDate.value = '';
     }
 
     updateProjectsDom() {
@@ -128,7 +123,12 @@ class ProjectManager {
         });
     }
 
-    displayForm = function () {
+    displayMainForm() {
+        formMain.classList.remove('hidden');
+        inputTitle.value = inputDueDate.value = '';
+    }
+
+    displaySidebarForm = function () {
         formSidebar.style.opacity = 100;
         formSidebar.classList.remove('hidden');
     };
