@@ -21,10 +21,6 @@ class toDo {
     constructor(title, dueDate) {
         (this.title = title), (this.dueDate = dueDate);
     }
-
-    setCheckBoxAttribute() {
-        return this.isChecked === true ? 'checked' : '';
-    }
 }
 
 // project
@@ -55,11 +51,46 @@ class ProjectManager {
 
         // display form
         buttonNewProject.addEventListener('click', this.displayForm);
+
+        // create project
+        formSidebar.addEventListener('submit', this.createProject.bind(this));
     }
 
     ///// METHODS
     addProject(pTitle) {
         this.projects.push(pTitle);
+    }
+
+    createProject(e) {
+        e.preventDefault();
+
+        const newProject = new Project(inputProject.value);
+
+        this.addProject(newProject);
+
+        sidebarList.innerHTML = '';
+
+        this.projects.forEach((project) => {
+            const li = document.createElement('li');
+            li.className = 'sidebar__list__item';
+            li.setAttribute('id', `${project.id}`);
+
+            let html;
+
+            html = `<p>
+                      ${project.projectTitle}
+                    </p>
+                      <p class="span__icon">
+                        <i class="las la-times-circle icon icon__close__project"></i>
+                      </p>
+                  `;
+            li.insertAdjacentHTML('afterBegin', html);
+            sidebarList.appendChild(li);
+        });
+
+        this.hideForm(formSidebar);
+
+        inputProject.value = '';
     }
 
     displayForm = function () {
