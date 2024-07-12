@@ -86,6 +86,23 @@ class ProjectManager {
                   `;
             li.insertAdjacentHTML('afterBegin', html);
             sidebarList.appendChild(li);
+
+            // delete project
+            const icon = li.querySelector('.icon__close__project');
+            icon.addEventListener('click', (e) => {
+                const clicked = e.target.closest('.sidebar__list__item');
+                const clickedProjectId = this.projects.findIndex(
+                    (proj) => proj.id === clicked.id
+                );
+                this.projects.splice(clickedProjectId, 1);
+
+                li.remove();
+
+                this.hideForm(formMain);
+                mainList.innerHTML = '';
+
+                inputTitle.value = inputDueDate.value = '';
+            });
         });
 
         this.hideForm(formSidebar);
