@@ -68,6 +68,14 @@ class ProjectManager {
 
         this.addProject(newProject);
 
+        this.updateProjectsDom();
+
+        this.hideForm(formSidebar);
+
+        inputProject.value = '';
+    }
+
+    updateProjectsDom() {
         sidebarList.innerHTML = '';
 
         this.projects.forEach((project) => {
@@ -92,10 +100,6 @@ class ProjectManager {
             // delete project
             this.deleteProjectEvent(icon, li);
         });
-
-        this.hideForm(formSidebar);
-
-        inputProject.value = '';
     }
 
     deleteProjectEvent(icon, listEl) {
