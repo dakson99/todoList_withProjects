@@ -49,6 +49,10 @@ class ProjectManager {
     constructor() {
         ///// EVENT LISTENERS
 
+        //check for no todo
+        btnNewTodo.addEventListener('click', this.displayMainForm);
+
+
         // display form
         buttonNewProject.addEventListener('click', this.displayForm);
 
@@ -73,6 +77,11 @@ class ProjectManager {
         this.hideForm(formSidebar);
 
         inputProject.value = '';
+    }
+
+    displayMainForm() {
+        formMain.classList.remove('hidden');
+        inputTitle.value = inputDueDate.value = '';
     }
 
     updateProjectsDom() {
