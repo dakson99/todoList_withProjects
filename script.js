@@ -50,7 +50,7 @@ class ProjectManager {
         ///// EVENT LISTENERS
 
         //check for no todo
-        btnNewTodo.addEventListener('click', this.displayMainForm);
+        btnNewTodo.addEventListener('click', this.displayMainForm.bind(this));
 
 
         // display form
@@ -123,7 +123,16 @@ class ProjectManager {
         });
     }
 
+    detectClickedProject(e) {
+        const clicked = e.target.closest('.sidebar__list__item');
+        this.clickedProject = this.projects.find(
+            (project) => project.id === clicked.id
+        );
+    }
+
     displayMainForm() {
+        if (!this.clickedProject) return alert('You must create a project first');
+
         formMain.classList.remove('hidden');
         inputTitle.value = inputDueDate.value = '';
     }
