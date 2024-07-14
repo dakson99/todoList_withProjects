@@ -58,6 +58,12 @@ class ProjectManager {
 
         // create project
         formSidebar.addEventListener('submit', this.createProject.bind(this));
+
+        //render todos when clicked on project
+        sidebarList.addEventListener('click', this.renderTodos.bind(this));
+
+        // create new todo
+        formMain.addEventListener('submit', this.createTodo.bind(this));
     }
 
     ///// METHODS
@@ -130,8 +136,85 @@ class ProjectManager {
         );
     }
 
+    //// todos
+    createTodo(e) {
+        e.preventDefault();
+
+        // const date = new Date(inputDueDate.value);
+        // const dateFormated = new Intl.DateTimeFormat('en-US').format(date);
+
+        this.addTodo = new toDo(inputTitle.value, inputDueDate.value);
+
+        this.clickedProject.todos.push(this.addTodo);
+
+        mainList.innerHTML = '';
+
+        this.clickedProject.todos.forEach((todo, i) => {
+            const li = document.createElement('li');
+            li.className = 'main__list__item';
+            li.innerHTML = `<div class="todo__item">
+                    <p>
+                      <i class="las la-pen-square icon"></i>  
+                  </p>
+                    <p class="todo_p">Title:</p> 
+                     <p class="todo_p2"> ${todo.title}</p>
+                  </div>    
+                <div class="todo__item">
+                  <p>
+                    <i class="las la-calendar-check icon"></i>
+                  </p>
+                  <p class="todo_p">Due date:</p>
+                  <p>${todo.dueDate}</p>
+                </div>
+                <div class="todo__buttons__div">
+                    <button class="btn btn__todo__edit">edit</button>
+                   <button class="btn btn__todo__delete">delete</button>
+                </div>
+                  `;
+
+            mainList.insertAdjacentElement('afterBegin', li);
+        });
+
+        this.hideForm(formMain);
+
+        inputTitle.value = inputDueDate.value = '';
+    }
+
+    renderTodos = function (e) {
+        this.detectClickedProject(e);
+
+        this.clickedProject.todos.forEach((todo, i) => {
+            const li = document.createElement('li');
+            li.className = 'main__list__item';
+            li.innerHTML = `<div class="todo__item">
+                    <p>
+                      <i class="las la-pen-square icon"></i>  
+                  </p>
+                    <p class="todo_p">Title:</p> 
+                     <p class="todo_p2"> ${todo.title}</p>
+                  </div>    
+                <div class="todo__item">
+                  <p>
+                    <i class="las la-calendar-check icon"></i>
+                  </p>
+                  <p class="todo_p">Due date:</p>
+                  <p>${todo.dueDate}</p>
+                </div>
+                <div class="todo__buttons__div">
+                    <button class="btn btn__todo__edit">edit</button>
+                   <button class="btn btn__todo__delete">delete</button>
+                </div>
+                <div class="todo__item">
+                 <input class="checkBox" type="checkbox"  name="checkbox" ${todo.setCheckBoxAttribute()} />
+                </div>
+                  `;
+
+            mainList.insertAdjacentElement('afterBegin', li);
+        });
+    };
+
     displayMainForm() {
-        if (!this.clickedProject) return alert('You must create a project first');
+        /* if (!this.clickedProject) return alert('You must create a project first'); */
 
         formMain.classList.remove('hidden');
         inputTitle.value = inputDueDate.value = '';
