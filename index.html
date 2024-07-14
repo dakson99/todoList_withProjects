@@ -98,9 +98,35 @@
                             <button class="btn btn__cancel__todo">Cancel</button>
                         </div>
                     </form>
+                    <form class="form__main form__edit hidden">
+                        <div class="form__main__labelinputs">
+                            <div class="form__main__labelinput form__main__labelinput__title">
+                                <label class="form__main__label" for="title">Todo:</label>
+                                <input class="form__main__input form__main__input__title form__main__input__title__edit"
+                                    type="text" id="titleEdited" name="titleEdited" required />
+                            </div>
+                            <div class="form__main__labelinput form__main__input__date form__main__input__date__edit">
+                                <label class="form__main__label" for="date">Due date:</label>
+                                <input class="form__main__input" type="date" id="dueDateEdited" name="dueDateEdited"
+                                    required />
+                            </div>
+                        </div>
+                        <div class="main__form__btns">
+                            <button class="btn btn__add__todo btn__add__todo__edit">
+                                Edit
+                            </button>
+                            <button class="btn btn__cancel__todo btn__cancel__todo__edit">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                    `;
                 </div>
             </div>
         </div>
+        <footer class="footer">
+            <p class="footer_p">&copy; Copyright by Darko Mikavica</p>
+        </footer>
     </div>
 </body>
 

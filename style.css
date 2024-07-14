@@ -242,6 +242,7 @@ body {
     gap: 1rem;
 }
 
+.btn__todo__edit,
 .btn__todo__delete {
     display: inline-block;
     font-size: 1.8rem;
@@ -326,10 +327,42 @@ body {
     background-color: #d69c9c;
 }
 
+.btn__add__todo__edit,
+.btn__todo__edit {
+    background-color: #ffe176;
+    border: 1px solid #ffd43b;
+}
+
+.btn__add__todo__edit:hover,
+.btn__todo__edit:hover {
+    background-color: #eed272;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.6rem;
+    background-color: #718e96;
+}
+
+.footer_p {
+    color: #fff;
+}
+
 .hidden {
     transform: translateY(-200rem);
     height: 0;
     padding: 0 2.25rem;
     margin-bottom: 0;
     opacity: 0;
+}
+
+.form__edit {
+    margin-bottom: 2rem;
 }
