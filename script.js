@@ -173,11 +173,27 @@ class ProjectManager {
                   `;
 
             mainList.insertAdjacentElement('afterBegin', li);
+
+            // delete todo
+            this.addDeleteEvent(li, todo);
         });
 
         this.hideForm(formMain);
 
         inputTitle.value = inputDueDate.value = '';
+    }
+
+    addDeleteEvent(element, todo) {
+        const btnDeleteTodo = element.querySelector('.btn__todo__delete');
+
+        btnDeleteTodo.addEventListener('click', () => {
+            this.clickedTodoId = this.clickedProject.todos.findIndex(
+                (td) => td.id === todo.id
+            );
+
+            this.clickedProject.todos.splice(this.clickedTodoId, 1);
+            element.remove();
+        });
     }
 
     renderTodos = function (e) {
