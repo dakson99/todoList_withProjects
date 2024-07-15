@@ -15,6 +15,12 @@ const inputDueDate = document.getElementById('dueDate');
 const btnNewTodo = document.querySelector('.btn__new__todo');
 const btnCancelTodo = document.querySelector('.btn__cancel__todo');
 
+//form edit
+const formEdit = document.querySelector('.form__edit');
+const inputTitleEdited = document.getElementById('titleEdited');
+const inputDateEdited = document.getElementById('dueDateEdited');
+const btnCancelTodoEdit = document.querySelector('.btn__cancel__todo__edit');
+
 // todos
 class toDo {
     id = self.crypto.randomUUID();
@@ -64,6 +70,9 @@ class ProjectManager {
 
         // create new todo
         formMain.addEventListener('submit', this.createTodo.bind(this));
+
+        // edit todo
+        formEdit.addEventListener('submit', this.formEditSubmit.bind(this));
     }
 
     ///// METHODS
@@ -176,6 +185,9 @@ class ProjectManager {
 
             // delete todo
             this.addDeleteEvent(li, todo);
+
+            // edit todo
+            this.addEditEvent(li, todo);
         });
 
         this.hideForm(formMain);
@@ -193,6 +205,27 @@ class ProjectManager {
 
             this.clickedProject.todos.splice(this.clickedTodoId, 1);
             element.remove();
+        });
+    }
+
+    addEditEvent(element, todo) {
+        const btnEdit = element.querySelector('.btn__todo__edit');
+
+        btnEdit.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            this.clickedTodoId = this.clickedProject.todos.findIndex(
+                (td) => td.id === todo.id
+            );
+
+            formEdit.classList.remove('hidden');
+
+            element.parentNode.insertBefore(formEdit, element.nextSibling);
+            inputTitleEdited.value =
+                this.clickedProject.todos[this.clickedTodoId].title;
+
+            inputDateEdited.value =
+                this.clickedProject.todos[this.clickedTodoId].dueDate;
         });
     }
 
@@ -228,6 +261,54 @@ class ProjectManager {
             mainList.insertAdjacentElement('afterBegin', li);
         });
     };
+
+    // form edit todo
+
+    formEditSubmit(e) {
+        e.preventDefault();
+
+        mainList.innerHTML = '';
+
+        this.addTodo = new toDo(inputTitleEdited.value, inputDateEdited.value);
+
+        this.clickedProject.todos[this.clickedTodoId] = this.addTodo;
+
+        this.clickedProject.todos.forEach((todo, i) => {
+            const li = document.createElement('li');
+            li.className = 'main__list__item';
+            li.innerHTML = `<div class="todo__item">
+                    <p>
+                      <i class="las la-pen-square icon"></i>  
+                  </p>
+                    <p class="todo_p">Title:</p> 
+                     <p class="todo_p2"> ${todo.title}</p>
+                  </div>    
+                <div class="todo__item">
+                  <p>
+                    <i class="las la-calendar-check icon"></i>
+                  </p>
+                  <p class="todo_p">Due date:</p>
+                  <p>${todo.dueDate}</p>
+                </div>
+                <div class="todo__buttons__div">
+                    <button class="btn btn__todo__edit">edit</button>
+                   <button class="btn btn__todo__delete">delete</button>
+                </div>
+                  `;
+
+            mainList.insertAdjacentElement('afterBegin', li);
+
+            inputTitleEdited.value = inputDateEdited.value = '';
+
+            // delete todo
+            this.addDeleteEvent(li, todo);
+
+            // edit todo
+            this.addEditEvent(li, todo);
+
+            this.hideForm(formEdit);
+        });
+    }
 
     displayMainForm() {
         if (!this.clickedProject) return alert('You must create a project first');
