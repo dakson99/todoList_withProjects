@@ -5,9 +5,9 @@ import {
     formMain,
     inputTitle,
     inputDueDate,
-} from './script.js';
+} from '../script.js';
 
-import { hideForm } from './formDOM.js';
+import { hideForm } from './modulesDOM/formDOM.js';
 
 export const updateProjectsDom = function () {
     sidebarList.innerHTML = '';

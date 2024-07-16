@@ -8,7 +8,7 @@ import {
     formEdit,
     inputTitleEdited,
     inputDateEdited,
-} from './script.js';
+} from '../script.js';
 
 // forms methods
 export const displayMainForm = function () {
