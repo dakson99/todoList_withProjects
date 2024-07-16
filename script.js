@@ -4,7 +4,7 @@
 import ToDo from './todo.js';
 import Project from './project.js';
 
-// import DOM
+// import forms DOM
 import {
     displayMainForm,
     displaySidebarForm,
@@ -12,17 +12,20 @@ import {
     preventDefaultSubmitProject,
     preventDefaultSubmitTodo,
     preventDefaultSubmitEdit,
-} from './dom.js';
+} from './formDOM.js';
+
+// import projects DOM
+import { updateProjectsDom } from './projectDOM.js';
 
 // sidebar
 export const formSidebar = document.querySelector('.form__sidebar');
 export const inputProject = document.getElementById('input__project');
-const sidebarList = document.querySelector('.sidebar__list');
+export const sidebarList = document.querySelector('.sidebar__list');
 const buttonNewProject = document.querySelector('.btn__new__project');
 const btnCancelProject = document.querySelector('.btn__cancel__project');
 
 // main
-const mainList = document.querySelector('.main__list');
+export const mainList = document.querySelector('.main__list');
 export const formMain = document.querySelector('.form__main');
 export const inputTitle = document.getElementById('title');
 export const inputDueDate = document.getElementById('dueDate');
@@ -72,11 +75,9 @@ class ProjectManager {
 
 
         // prevent default submit todo
-        // prettier-ignore
         btnCancelTodo.addEventListener('click', preventDefaultSubmitTodo);
 
         // prevent default submit edit form
-        // prettier-ignore
         btnCancelTodoEdit.addEventListener('click', preventDefaultSubmitEdit);
     }
 
@@ -92,56 +93,13 @@ class ProjectManager {
 
         this.addProject(newProject);
 
-        this.updateProjectsDom();
+        updateProjectsDom();
 
         hideForm(formSidebar);
 
         inputProject.value = '';
     }
 
-    updateProjectsDom() {
-        sidebarList.innerHTML = '';
-
-        this.projects.forEach((project) => {
-            const li = document.createElement('li');
-            li.className = 'sidebar__list__item';
-            li.setAttribute('id', `${project.id}`);
-
-            let html;
-
-            html = `<p>
-                      ${project.projectTitle}
-                    </p>
-                      <p class="span__icon">
-                        <i class="las la-times-circle icon icon__close__project"></i>
-                      </p>
-                  `;
-            li.insertAdjacentHTML('afterBegin', html);
-            sidebarList.appendChild(li);
-
-            const icon = li.querySelector('.icon__close__project');
-
-            // delete project
-            this.deleteProjectEvent(icon, li);
-        });
-    }
-
-    deleteProjectEvent(icon, listEl) {
-        icon.addEventListener('click', (e) => {
-            const clicked = e.target.closest('.sidebar__list__item');
-            const clickedProjectId = this.projects.findIndex(
-                (proj) => proj.id === clicked.id
-            );
-            this.projects.splice(clickedProjectId, 1);
-
-            listEl.remove();
-
-            hideForm(formMain);
-            mainList.innerHTML = '';
-
-            inputTitle.value = inputDueDate.value = '';
-        });
-    }
 
     detectClickedProject(e) {
         const clicked = e.target.closest('.sidebar__list__item');
