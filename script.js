@@ -1,28 +1,38 @@
 'use strict';
 
-//imports
+//import classes
 import ToDo from './todo.js';
 import Project from './project.js';
 
+// import DOM
+import {
+    displayMainForm,
+    displaySidebarForm,
+    hideForm,
+    preventDefaultSubmitProject,
+    preventDefaultSubmitTodo,
+    preventDefaultSubmitEdit,
+} from './dom.js';
+
 // sidebar
-const formSidebar = document.querySelector('.form__sidebar');
-const inputProject = document.getElementById('input__project');
+export const formSidebar = document.querySelector('.form__sidebar');
+export const inputProject = document.getElementById('input__project');
 const sidebarList = document.querySelector('.sidebar__list');
 const buttonNewProject = document.querySelector('.btn__new__project');
 const btnCancelProject = document.querySelector('.btn__cancel__project');
 
 // main
 const mainList = document.querySelector('.main__list');
-const formMain = document.querySelector('.form__main');
-const inputTitle = document.getElementById('title');
-const inputDueDate = document.getElementById('dueDate');
+export const formMain = document.querySelector('.form__main');
+export const inputTitle = document.getElementById('title');
+export const inputDueDate = document.getElementById('dueDate');
 const btnNewTodo = document.querySelector('.btn__new__todo');
 const btnCancelTodo = document.querySelector('.btn__cancel__todo');
 
 //form edit
-const formEdit = document.querySelector('.form__edit');
-const inputTitleEdited = document.getElementById('titleEdited');
-const inputDateEdited = document.getElementById('dueDateEdited');
+export const formEdit = document.querySelector('.form__edit');
+export const inputTitleEdited = document.getElementById('titleEdited');
+export const inputDateEdited = document.getElementById('dueDateEdited');
 const btnCancelTodoEdit = document.querySelector('.btn__cancel__todo__edit');
 
 
@@ -39,11 +49,11 @@ class ProjectManager {
         ///// EVENT LISTENERS
 
         //check for no todo
-        btnNewTodo.addEventListener('click', this.displayMainForm.bind(this));
+        btnNewTodo.addEventListener('click', displayMainForm);
 
 
         // display form
-        buttonNewProject.addEventListener('click', this.displaySidebarForm);
+        buttonNewProject.addEventListener('click', displaySidebarForm);
 
         // create project
         formSidebar.addEventListener('submit', this.createProject.bind(this));
@@ -58,16 +68,16 @@ class ProjectManager {
         formEdit.addEventListener('submit', this.formEditSubmit.bind(this));
 
         // prevent default submit project
-        // prettier-ignore
-        btnCancelProject.addEventListener('click', this.preventDefaultSubmitProject.bind(this));
+        btnCancelProject.addEventListener('click', preventDefaultSubmitProject);
+
 
         // prevent default submit todo
         // prettier-ignore
-        btnCancelTodo.addEventListener('click', this.preventDefaultSubmitTodo.bind(this));
+        btnCancelTodo.addEventListener('click', preventDefaultSubmitTodo);
 
         // prevent default submit edit form
         // prettier-ignore
-        btnCancelTodoEdit.addEventListener('click', this.preventDefaultSubmitEdit.bind(this));
+        btnCancelTodoEdit.addEventListener('click', preventDefaultSubmitEdit);
     }
 
     ///// METHODS
@@ -84,7 +94,7 @@ class ProjectManager {
 
         this.updateProjectsDom();
 
-        this.hideForm(formSidebar);
+        hideForm(formSidebar);
 
         inputProject.value = '';
     }
@@ -126,7 +136,7 @@ class ProjectManager {
 
             listEl.remove();
 
-            this.hideForm(formMain);
+            hideForm(formMain);
             mainList.innerHTML = '';
 
             inputTitle.value = inputDueDate.value = '';
@@ -167,7 +177,7 @@ class ProjectManager {
             this.addCheckBoxEvent(li, todo);
         });
 
-        this.hideForm(formMain);
+        hideForm(formMain);
 
         inputTitle.value = inputDueDate.value = '';
     }
@@ -283,31 +293,9 @@ class ProjectManager {
 
         this.clickedProject.todos.forEach((todo, i) => {
             const li = document.createElement('li');
-            li.className = 'main__list__item';
-            li.innerHTML = `< div class="todo__item" >
-                    <p>
-                      <i class="las la-pen-square icon"></i>  
-                  </p>
-                    <p class="todo_p">Title:</p> 
-                     <p class="todo_p2"> ${todo.title}</p>
-                  </div >    
-                <div class="todo__item">
-                  <p>
-                    <i class="las la-calendar-check icon"></i>
-                  </p>
-                  <p class="todo_p">Due date:</p>
-                  <p>${todo.dueDate}</p>
-                </div>
-                <div class="todo__buttons__div">
-                    <button class="btn btn__todo__edit">edit</button>
-                   <button class="btn btn__todo__delete">delete</button>
-                </div>
-                <div class="todo__item">
-                 <input class="checkBox" type="checkbox"  name="checkbox" ${todo.setCheckBoxAttribute()} />
-                </div>
-            `;
 
-            mainList.insertAdjacentElement('afterBegin', li);
+
+            this.createTodoContent(todo, li);
 
             inputTitleEdited.value = inputDateEdited.value = '';
 
@@ -320,49 +308,12 @@ class ProjectManager {
             // checkbox
             this.addCheckBoxEvent(li, todo);
 
-            this.hideForm(formEdit);
+            hideForm(formEdit);
         });
     }
 
-    //prevent default submits
-    preventDefaultSubmitProject(e) {
-        e.preventDefault();
-        inputProject.value = '';
-        this.hideForm(formSidebar);
-    }
 
-    preventDefaultSubmitTodo(e) {
-        e.preventDefault();
-        inputTitle.value = inputDueDate.value = '';
-        this.hideForm(formMain);
-    }
-
-    preventDefaultSubmitEdit(e) {
-        e.preventDefault();
-        inputTitleEdited.value = inputDateEdited.value = '';
-        this.hideForm(formEdit);
-    }
-
-    displayMainForm() {
-        if (!this.clickedProject) return alert('You must create a project first');
-
-        formMain.classList.remove('hidden');
-        inputTitle.value = inputDueDate.value = '';
-    }
-
-    displaySidebarForm = function () {
-        formSidebar.style.opacity = 100;
-        formSidebar.classList.remove('hidden');
-    };
-
-    hideForm = function (form) {
-        form.style.display = 'none';
-        form.classList.add('hidden');
-        setTimeout(() => {
-            form.style.display = 'grid';
-        }, 1000);
-    };
 }
 
 // project manager
-const app = new ProjectManager();
+export const app = new ProjectManager();
