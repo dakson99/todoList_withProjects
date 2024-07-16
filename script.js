@@ -78,6 +78,18 @@ class ProjectManager {
 
         // edit todo
         formEdit.addEventListener('submit', this.formEditSubmit.bind(this));
+
+        // prevent default submit project
+        // prettier-ignore
+        btnCancelProject.addEventListener('click', this.preventDefaultSubmitProject.bind(this));
+
+        // prevent default submit todo
+        // prettier-ignore
+        btnCancelTodo.addEventListener('click', this.preventDefaultSubmitTodo.bind(this));
+
+        // prevent default submit edit form
+        // prettier-ignore
+        btnCancelTodoEdit.addEventListener('click', this.preventDefaultSubmitEdit.bind(this));
     }
 
     ///// METHODS
@@ -332,6 +344,25 @@ class ProjectManager {
 
             this.hideForm(formEdit);
         });
+    }
+
+    //prevent default submits
+    preventDefaultSubmitProject(e) {
+        e.preventDefault();
+        inputProject.value = '';
+        this.hideForm(formSidebar);
+    }
+
+    preventDefaultSubmitTodo(e) {
+        e.preventDefault();
+        inputTitle.value = inputDueDate.value = '';
+        this.hideForm(formMain);
+    }
+
+    preventDefaultSubmitEdit(e) {
+        e.preventDefault();
+        inputTitleEdited = inputDateEdited.value = '';
+        this.hideForm(formEdit);
     }
 
     displayMainForm() {
