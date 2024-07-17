@@ -1,8 +1,8 @@
 'use strict';
 
 //import classes
-import ToDo from './classComponents/todo.js';
-import Project from './classComponents/project.js';
+import ToDo from './modulesDOM/classComponents/todo.js';
+import Project from './modulesDOM/classComponents/project.js';
 
 // import forms DOM
 import {
@@ -55,18 +55,17 @@ class ProjectManager {
     projects = [];
     clickedProject;
     clickedProjectId;
-    addTodo;
-    addTodoEdited;
+    newTodo;
+    newTodoEdited;
     clickedTodoId;
 
     constructor() {
         ///// EVENT LISTENERS
 
-        //check for no todo
+        //display todos form, check for no todo
         btnNewTodo.addEventListener('click', displayMainForm);
 
-
-        // display form
+        // display projects form
         buttonNewProject.addEventListener('click', displaySidebarForm);
 
         // create project
@@ -126,9 +125,9 @@ class ProjectManager {
         // const date = new Date(inputDueDate.value);
         // const dateFormated = new Intl.DateTimeFormat('en-US').format(date);
 
-        this.addTodo = new ToDo(inputTitle.value, inputDueDate.value);
+        this.newTodo = new ToDo(inputTitle.value, inputDueDate.value);
 
-        this.clickedProject.todos.push(this.addTodo);
+        this.clickedProject.todos.push(this.newTodo);
 
         mainList.innerHTML = '';
 
@@ -168,9 +167,9 @@ class ProjectManager {
 
         mainList.innerHTML = '';
 
-        this.addTodo = new ToDo(inputTitleEdited.value, inputDateEdited.value);
+        this.newTodo = new ToDo(inputTitleEdited.value, inputDateEdited.value);
 
-        this.clickedProject.todos[this.clickedTodoId] = this.addTodo;
+        this.clickedProject.todos[this.clickedTodoId] = this.newTodo;
 
         this.clickedProject.todos.forEach((todo, i) => {
             const li = document.createElement('li');
