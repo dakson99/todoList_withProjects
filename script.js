@@ -15,7 +15,7 @@ import {
 } from './modulesDOM/formDOM.js';
 
 // import projects DOM
-import { updateProjectsDom } from './modulesDOM/projectDOM.js';
+import { updateProjectsDom } from './modulesDOM/projectDOM';
 
 // sidebar
 export const formSidebar = document.querySelector('.form__sidebar');
