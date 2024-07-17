@@ -7,7 +7,7 @@ import {
     inputDueDate,
 } from '../script.js';
 
-import { hideForm } from './modulesDOM/formDOM.js';
+import { hideForm } from './formDOM.js';
 
 export const updateProjectsDom = function () {
     sidebarList.innerHTML = '';
