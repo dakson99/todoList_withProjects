@@ -20,7 +20,9 @@ import {
     deleteProjectEvent,
 } from './modulesDOM/projectDOM.js';
 
-// sidebar
+// import todos DOM
+import { createTodoContent, li } from './modulesDOM/todoDOM.js';
+
 export const formSidebar = document.querySelector('.form__sidebar');
 export const inputProject = document.getElementById('input__project');
 export const sidebarList = document.querySelector('.sidebar__list');
@@ -125,8 +127,7 @@ class ProjectManager {
         mainList.innerHTML = '';
 
         this.clickedProject.todos.forEach((todo) => {
-            const li = document.createElement('li');
-            this.createTodoContent(todo, li);
+            createTodoContent(todo, li);
 
             // delete todo
             this.addDeleteEvent(li, todo);
@@ -143,33 +144,6 @@ class ProjectManager {
         inputTitle.value = inputDueDate.value = '';
     }
 
-    createTodoContent(todo, li) {
-        li.className = 'main__list__item';
-        li.innerHTML = `<div class="todo__item">
-                    <p>
-                      <i class="las la-pen-square icon"></i>  
-                  </p>
-                    <p class="todo_p">Title:</p> 
-                     <p class="todo_p2"> ${todo.title}</p>
-                  </div >    
-                <div class="todo__item">
-                  <p>
-                    <i class="las la-calendar-check icon"></i>
-                  </p>
-                  <p class="todo_p">Due date:</p>
-                  <p>${todo.dueDate}</p>
-                </div>
-                <div class="todo__buttons__div">
-                    <button class="btn btn__todo__edit">edit</button>
-                   <button class="btn btn__todo__delete">delete</button>
-                </div>
-                 <div class="todo__item">
-                 <input class="checkBox" type="checkbox"  name="checkbox" ${todo.setCheckBoxAttribute()} />
-                </div>
-            `;
-
-        mainList.insertAdjacentElement('afterBegin', li);
-    }
 
     addDeleteEvent(element, todo) {
         const btnDeleteTodo = element.querySelector('.btn__todo__delete');
@@ -228,7 +202,7 @@ class ProjectManager {
         this.clickedProject.todos.forEach((todo, i) => {
             const li = document.createElement('li');
 
-            this.createTodoContent(todo, li);
+            createTodoContent(todo, li);
 
             // delete todo
             this.addDeleteEvent(li, todo);
@@ -253,10 +227,7 @@ class ProjectManager {
         this.clickedProject.todos[this.clickedTodoId] = this.addTodo;
 
         this.clickedProject.todos.forEach((todo, i) => {
-            const li = document.createElement('li');
-
-
-            this.createTodoContent(todo, li);
+            createTodoContent(todo, li);
 
             inputTitleEdited.value = inputDateEdited.value = '';
 
