@@ -62,6 +62,8 @@ class ProjectManager {
     constructor() {
         ///// EVENT LISTENERS
 
+        this.getLocalStorage();
+
         //display todos form, check for no todo
         btnNewTodo.addEventListener('click', displayMainForm);
 
@@ -106,6 +108,8 @@ class ProjectManager {
         updateProjectsDom();
 
         hideForm(formSidebar);
+
+        this.setLocalStorage();
 
         inputProject.value = '';
     }
@@ -182,6 +186,21 @@ class ProjectManager {
 
             inputTitleEdited.value = inputDateEdited.value = '';
         });
+    }
+
+    setLocalStorage() {
+        localStorage.setItem('projects', JSON.stringify(this.projects));
+    }
+
+    getLocalStorage() {
+        const data = JSON.parse(localStorage.getItem('projects'));
+        console.log(data);
+
+        if (!data) return;
+
+        this.projects = data;
+
+        this.projects.forEach((project) => updateProjectsDom);
     }
 }
 
