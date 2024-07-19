@@ -42,7 +42,9 @@ export const deleteProjectEvent = function (icon, listEl) {
         const clickedProjectId = app.projects.findIndex(
             (proj) => proj.id === clicked.id
         );
+
         app.projects.splice(clickedProjectId, 1);
+        app.setLocalStorage();
 
         listEl.remove();
 
