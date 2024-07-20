@@ -1,9 +1,9 @@
 // project
 class Project {
-    id = self.crypto.randomUUID();
     todos = [];
-    constructor(projectTitle) {
+    constructor(projectTitle, id = self.crypto.randomUUID()) {
         this.projectTitle = projectTitle;
+        this.id = id;
     }
 
     pushTodo(todo) {
