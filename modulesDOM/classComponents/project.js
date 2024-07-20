@@ -1,12 +1,12 @@
 // project
 class Project {
+    id = self.crypto.randomUUID();
     todos = [];
-    constructor(projectTitle, id = self.crypto.randomUUID()) {
+    constructor(projectTitle) {
         this.projectTitle = projectTitle;
-        this.id = id;
     }
 
-    pushTodo(todo) {
+    addTodo(todo) {
         this.todos.push(todo);
         return [...this.todos];
     }

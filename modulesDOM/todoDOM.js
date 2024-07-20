@@ -44,6 +44,8 @@ export const addDeleteEvent = function (element, todo) {
 
         app.clickedProject.todos.splice(app.clickedTodoId, 1);
         element.remove();
+
+        app.setLocalStorage();
     });
 };
 

@@ -1,14 +1,9 @@
 // todos
 class ToDo {
-    constructor(
-        title,
-        dueDate,
-        isChecked = false,
-        id = self.crypto.randomUUID()
-    ) {
+    id = self.crypto.randomUUID();
+    constructor(title, dueDate, isChecked = false) {
         (this.title = title), (this.dueDate = dueDate);
         this.isChecked = isChecked;
-        this.id = id;
     }
 
     setCheckBoxAttribute() {
