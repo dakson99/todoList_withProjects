@@ -74,7 +74,10 @@ export const addCheckBoxEvent = function (element, todo) {
         (td) => td.id === todo.id
     );
 
-    checkBox.addEventListener('change', () => (todo.isChecked = !todo.isChecked));
+    checkBox.addEventListener('change', () => {
+        todo.isChecked = !todo.isChecked;
+        app.setLocalStorage();
+    });
 };
 
 export const attachTodoEventListeners = function (element, todo) {
