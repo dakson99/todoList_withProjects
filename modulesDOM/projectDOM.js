@@ -9,10 +9,10 @@ import {
 
 import { hideForm } from './formDOM.js';
 
-export const updateProjectsDom = function () {
+export const updateProjectsDom = function (thisKeyword) {
     sidebarList.innerHTML = '';
 
-    app.projects.forEach((project) => {
+    thisKeyword.projects.forEach((project) => {
         const li = document.createElement('li');
         li.className = 'sidebar__list__item';
         li.setAttribute('id', `${project.id}`);

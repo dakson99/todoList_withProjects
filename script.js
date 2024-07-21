@@ -105,7 +105,7 @@ class ProjectManager {
 
         this.addProject(newProject);
 
-        updateProjectsDom();
+        updateProjectsDom(this);
 
         hideForm(formSidebar);
 
@@ -185,8 +185,6 @@ class ProjectManager {
 
     setLocalStorage() {
         localStorage.setItem('projects', JSON.stringify(this.projects));
-
-        if (!this.clickedProject) return;
     }
 
     getLocalStorage() {
@@ -204,29 +202,7 @@ class ProjectManager {
             });
         });
 
-        // just DOM stuff
-        this.projects.forEach((project) => {
-            const li = document.createElement('li');
-            li.className = 'sidebar__list__item';
-            li.setAttribute('id', `${project.id}`);
-
-            let html;
-
-            html = `<p>
-                        ${project.projectTitle}
-                      </p>
-                        <p class="span__icon">
-                          <i class="las la-times-circle icon icon__close__project"></i>
-                        </p>
-                    `;
-            li.insertAdjacentHTML('afterBegin', html);
-            sidebarList.appendChild(li);
-
-            const icon = li.querySelector('.icon__close__project');
-
-            // delete project
-            deleteProjectEvent(icon, li);
-        });
+        updateProjectsDom(this);
     }
 }
 
